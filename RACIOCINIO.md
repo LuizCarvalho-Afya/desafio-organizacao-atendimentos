@@ -1,74 +1,83 @@
-# RACIOCINIO.md
+# RACIOCÍNIO DA SOLUÇÃO
 
 # Parte 1 — Modelagem do problema
 
 ## 1. Classificação do problema
 
-Classifiquei o problema como escalonamento e otimização combinatória, pois o objetivo é organizar atendimentos em horários e consultórios sem conflitos, utilizando os recursos da melhor forma possível.
+Classifiquei esse problema como escalonamento e otimização de recursos.
+
+O objetivo é organizar atendimentos sem conflito de horários utilizando o menor número possível de consultórios, além de priorizar atendimentos expressos.
 
 
 ## 2. Semelhança com problemas clássicos
 
-O problema é parecido com o "Interval Scheduling", onde tarefas com horário de início e fim precisam ser organizadas sem sobreposição.
+O problema é parecido com o Interval Scheduling.
 
-Também lembra "Bin Packing", pois os consultórios funcionam como espaços que recebem atendimentos respeitando limites.
+Cada atendimento representa um intervalo de tempo e cada consultório funciona como um recurso disponível para receber esses intervalos sem sobreposição.
 
 
-## 3. Estruturas de dados
+## 3. Estruturas de dados utilizadas
 
-Utilizei listas para armazenar atendimentos e consultórios, pois são simples e facilitam a organização cronológica.
+Utilizei classes para representar atendimentos e consultórios.
 
-Cada atendimento possui informações como horário, duração e prioridade.
+Também utilizei listas para armazenar os dados, pois facilitam a ordenação e o percurso dos atendimentos durante a organização.
 
 # Parte 2 — Estratégia algorítmica
 
-## 4. Funcionamento do algoritmo
+## 4. Descrição do algoritmo
 
-O programa lê os atendimentos, ordena por horário e tenta encaixar cada atendimento em um consultório disponível.
+1. Os atendimentos são ordenados priorizando expressos e horários menores.
 
-Se não existir consultório livre, um novo é criado.
+2. O sistema percorre cada atendimento.
 
-Atendimentos expressos recebem prioridade.
+3. O algoritmo tenta encaixar o atendimento em um consultório já existente.
 
-
-## 5. Tipo de abordagem
-
-A solução utiliza uma abordagem gulosa (greedy), pois toma decisões locais rápidas tentando encaixar cada atendimento no primeiro consultório possível.
+4. Caso não seja possível, um novo consultório é criado.
 
 
-## 6. Limitação da solução
+## 5. Tipo de abordagem utilizada
 
-Em alguns casos, o algoritmo pode abrir mais consultórios do que o necessário por não analisar todas as combinações possíveis antes de decidir.
+A solução utiliza abordagem gulosa (greedy).
+
+O algoritmo tenta reutilizar o primeiro consultório disponível encontrado, buscando uma solução simples e eficiente.
 
 
-## 7. Complexidade
+## 6. Limitações da solução
 
-A ordenação inicial custa O(n log n).
+Em alguns casos, a solução pode criar mais consultórios do que o necessário, pois o algoritmo toma decisões imediatas sem analisar todas as combinações possíveis.
 
-Depois, o algoritmo pode percorrer vários consultórios para cada atendimento, chegando a aproximadamente O(n²) no pior caso.
+
+## 7. Complexidade da solução
+
+A complexidade aproximada é O(n²), pois para cada atendimento o algoritmo pode percorrer todos os consultórios existentes.
+
 
 # Parte 3 — Decisões de implementação
 
-## 8. Abertura de consultórios
+## 8. Como o sistema decide quantos consultórios abrir?
 
-Um novo consultório é aberto apenas quando nenhum dos existentes consegue receber o atendimento sem conflito de horário.
-
-
-## 9. Atendimentos expressos
-
-Os atendimentos expressos receberam prioridade para reduzir o tempo de espera e melhorar o atendimento dos casos urgentes.
+O sistema cria um novo consultório apenas quando nenhum consultório existente consegue receber o atendimento sem conflito de horário.
 
 
-## 10. Melhor parte da solução
+## 9. Tratamento dos atendimentos expressos
 
-A reutilização de consultórios antes de abrir novos foi a parte mais eficiente da solução.
+Os atendimentos expressos recebem prioridade durante a ordenação inicial, ficando na frente dos atendimentos normais.
 
 
-## 11. Parte que pode melhorar
+## 10. Parte mais inteligente da solução
 
-A busca por consultórios disponíveis pode ser otimizada usando estruturas mais eficientes, como filas de prioridade.
+A parte principal da solução é a verificação de conflito de horários:
 
+```python id="vyff6q"
+return atendimento.inicio >= ultimo.fim
+```
+
+Essa lógica impede que dois atendimentos ocupem o mesmo consultório ao mesmo tempo.
+
+## 11. Parte que pode ser melhorada
+
+A organização dos horários poderia ser otimizada utilizando estruturas mais avançadas para melhorar o desempenho em cenários maiores.
 
 ## 12. Considerações finais
 
-A solução priorizou simplicidade, organização e facilidade de explicação durante a defesa oral, mantendo um bom equilíbrio entre clareza e eficiência.
+Busquei criar uma solução simples, organizada e fácil de explicar, além de implementar uma interface gráfica utilizando Tkinter para melhorar a visualização do sistema.
