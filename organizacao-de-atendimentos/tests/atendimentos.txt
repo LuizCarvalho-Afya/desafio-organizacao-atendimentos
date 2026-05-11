@@ -1,0 +1,6 @@
+Joao,8,9,false
+Maria,8,10,true
+Pedro,9,10,false
+Ana,10,11,false
+Carlos,14,15,false
+Julia,15,16,true
